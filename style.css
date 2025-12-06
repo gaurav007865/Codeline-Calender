@@ -1,0 +1,621 @@
+/* ============================= */
+/* VARIABLES & GLOBALS           */
+/* ============================= */
+:root {
+  --primary-color: #a259ff;
+  --secondary-color: #f48fb1;
+  --accent-color: #ffb74d;
+
+  --text-dark: #2c3e50;
+  --text-light: #ffffff;
+
+  --card-bg: #ffffff;
+
+  --shadow-color-subtle: rgba(0, 0, 0, 0.05);
+  --shadow-color-deep: rgba(0, 0, 0, 0.12);
+
+  --radius: 20px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #800080, #b845b4);
+  min-height: 100vh;
+  color: var(--text-dark);
+}
+
+/* ============================= */
+/* CORE CARD STYLING / SHADOW    */
+/* ============================= */
+
+.dashboard-header,
+.calendar-card,
+#employeePanel,
+#leave-requests-list,
+#events-list,
+#add-forms-container,
+#active-wo-exchanges-list,
+.modal-content {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow:
+    0 4px 10px var(--shadow-color-subtle),
+    0 15px 30px var(--shadow-color-deep);
+}
+
+/* ============================= */
+/* LAYOUT                        */
+/* ============================= */
+
+.admin-container {
+  padding: 25px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* ============================= */
+/* HEADER                        */
+/* ============================= */
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+
+.dashboard-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-logo {
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+/* Logout button */
+#logout-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+#logout-btn:hover { transform: scale(1.05); }
+
+/* ============================= */
+/* GRID                          */
+/* ============================= */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+/* ============================= */
+/* CALENDAR                      */
+/* ============================= */
+
+.calendar-card {
+  padding: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.calendar-header button {
+  background: var(--primary-color);
+  color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.calendar-header button:hover { background: var(--accent-color); }
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-days div {
+  height: 70px;
+  padding: 10px 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* STATES */
+.calendar-days .holiday {
+  background: #f1e6ff;
+  color: #bb4dff;
+  font-weight: bold;
+}
+
+.calendar-days .weekoff {
+  background: #e3f2fd;
+  color: #42a5f5;
+  font-style: italic;
+}
+
+.calendar-days .leave {
+  background: #fcdde6;
+  color: #de0f54;
+  font-weight: bold;
+}
+
+.calendar-days .today {
+  background: #eaf9eb;
+  color: #388e3c;
+  font-weight: bold;
+  border: 2px solid #81c784;
+}
+
+/* Hover */
+.calendar-days div:not(.holiday, .weekoff, .leave, .today):hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* ============================= */
+/* LEGEND                        */
+/* ============================= */
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.holiday-color { background: #bb4dff; }
+.weekoff-color { background: #42a5f5; }
+.leave-color { background: #de0f54; }
+.today-color { background: #81c784; }
+
+/* ============================= */
+/* EMPLOYEE LIST                 */
+/* ============================= */
+
+#employeePanel {
+  padding: 30px;
+}
+
+#empSearch {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.employee-list {
+  padding: 0;
+  list-style: none;
+}
+
+.employee-list li {
+  background: #f9f9ff;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.employee-list li:hover {
+  background: linear-gradient(135deg, #a259ff, #f48fb1);
+  color: white;
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(162,89,255,0.4);
+}
+
+/* ============================= */
+/* LEAVE REQUEST TABLE           */
+/* ============================= */
+
+#leave-requests-list {
+  padding: 30px;
+  overflow-x: auto;
+}
+
+#admin-leave-requests {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#admin-leave-requests th,
+#admin-leave-requests td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Buttons */
+.approve-btn,
+.reject-btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.approve-btn { background: linear-gradient(135deg, #4caf50, #81c784); }
+.reject-btn { background: linear-gradient(135deg, #e53935, #ef5350); }
+.approve-btn:hover,
+.reject-btn:hover { transform: scale(1.05); }
+
+/* ============================= */
+/* EVENTS                        */
+/* ============================= */
+
+#events-list {
+  padding: 30px;
+}
+
+#events-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#events-list th,
+#events-list td {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* ============================= */
+/* ADD FORMS                     */
+/* ============================= */
+
+#add-forms-container {
+  padding: 30px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* ============================= */
+/* MODAL                         */
+/* ============================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(5px);
+  transition: opacity .4s ease;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 5px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* RESPONSIVE                    */
+/* ============================= */
+
+@media(max-width:768px){
+  .admin-container{ padding: 15px; }
+
+  .dashboard-header{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section-grid{
+    grid-template-columns:1fr;
+  }
+
+  .calendar-days div{
+    height: 50px;
+    padding: 3px;
+    font-size:.85rem;
+  }
+}
+
+/* ================================================= */
+/*                PREMIUM UI ADDITIONS               */
+/* ================================================= */
+
+
+/* SECTION CARDS */
+.events-section,
+.form-section,
+.card-section {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 30px;
+  margin-top: 30px;
+  box-shadow:
+    0 4px 10px var(--shadow-color-subtle),
+    0 15px 30px var(--shadow-color-deep);
+  transition: var(--transition);
+}
+
+.events-section:hover,
+.form-section:hover,
+.card-section:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 6px 16px var(--shadow-color-subtle),
+    0 20px 36px var(--shadow-color-deep);
+}
+
+.events-section h3,
+.form-section h3,
+.card-section h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+
+/* REMAINING LEAVES */
+#remaining-leaves-display {
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+#leaves-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+#leaves-summary > div {
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px;
+  flex: 1;
+  min-width: 260px;
+  text-align: center;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.05);
+  transition: .3s;
+}
+
+#leaves-summary > div:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.1);
+}
+
+#leaves-summary h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+#leaves-summary .count {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: #27ae60;
+}
+
+#leaves-summary .total {
+  font-size: .95rem;
+  color: #777;
+  margin-top: -5px;
+}
+
+#remaining-leaves-display .footer {
+  background: #efefef;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: .95rem;
+  margin-top: 20px;
+}
+
+
+/* LEAVE TABLE PREMIUM */
+#emp-leave-table {
+  overflow-x: auto;
+}
+
+#emp-leave-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .95rem;
+  margin-top: 20px;
+}
+
+#emp-leave-table th {
+  background: var(--primary-color);
+  color: white;
+  text-align: left;
+  padding: 12px 10px;
+  font-weight: 500;
+}
+
+#emp-leave-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#emp-leave-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+#emp-leave-table .approve-btn,
+#emp-leave-table .reject-btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: .2s;
+  font-size: .8rem;
+}
+
+#emp-leave-table .approve-btn { background: #4CAF50; }
+#emp-leave-table .reject-btn  { background: #E53935; }
+
+#emp-leave-table .approve-btn:hover,
+#emp-leave-table .reject-btn:hover {
+  transform: scale(1.08);
+  opacity: .9;
+}
+
+
+/* STATUS BADGES */
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: .8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status.approved { background: #d4edda; color: #155724; }
+.status.rejected { background: #f8d7da; color: #721c24; }
+.status.pending  { background: #fff3cd; color: #856404; }
+
+
+/* APPLY FORM UI */
+#apply-leave-section input,
+#apply-leave-section select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.05);
+}
+
+#apply-leave-section button {
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#apply-leave-section button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+  #leaves-summary {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #leaves-summary > div {
+    min-width: 100%;
+  }
+
+  .events-section,
+  .form-section,
+  .card-section {
+    padding: 18px;
+  }
+
+  #emp-leave-table th,
+  #emp-leave-table td {
+    font-size: .8rem;
+    padding: 8px;
+  }
+}
