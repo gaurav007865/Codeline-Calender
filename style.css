@@ -78,7 +78,6 @@ body {
   color: var(--primary-color);
 }
 
-/* Logo */
 .logo-container {
   display: flex;
   align-items: center;
@@ -399,4 +398,152 @@ select {
     padding: 3px;
     font-size:.85rem;
   }
+}
+
+
+/* ================================================================= */
+/*                NEW ADDITIONAL STYLES (NO REPLACE)                 */
+/* ================================================================= */
+
+
+/* SECTION CARD LOOK */
+.section-card,
+.form-section,
+.card-section,
+.events-section,
+#apply-leave-section,
+#weekoff-exchange-section,
+#remaining-leaves-display,
+#emp-leave-table,
+#events-list {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 35px;
+  box-shadow:
+    0 4px 10px var(--shadow-color-subtle),
+    0 15px 30px var(--shadow-color-deep);
+  transition: var(--transition);
+}
+
+.section-card:hover,
+.form-section:hover,
+.card-section:hover,
+.events-section:hover {
+  transform: translateY(-3px);
+}
+
+/* HEADINGS */
+
+.form-section h3,
+.card-section h2,
+.card-section h3,
+.events-section h3 {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-left: 5px solid var(--primary-color);
+  padding-left: 12px;
+  margin-bottom: 20px;
+}
+
+/* BUTTONS GLOBAL */
+
+button,
+input[type="button"],
+input[type="submit"] {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 25px;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s ease;
+  box-shadow: 0 6px 15px rgba(162, 89, 255, 0.25);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: .9;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+/* SPECIAL BUTTONS */
+
+#send-exchange-btn {
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
+}
+
+#send-exchange-btn:hover {
+  box-shadow: 0 8px 18px rgba(66,165,245,0.4);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+  button {
+    width: 100%;
+    border-radius: 40px;
+    padding: 14px;
+  }
+}
+/* ============================= */
+/* REMAINING LEAVES CARD         */
+/* ============================= */
+
+#remaining-leaves-display {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.05),
+    0 15px 25px rgba(0,0,0,0.12);
+  margin-bottom: 30px;
+}
+
+/* Heading */
+#remaining-leaves-display h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  border-left: 5px solid var(--primary-color);
+  padding-left: 12px;
+  margin-bottom: 18px;
+}
+
+/* List container */
+#leaves-summary {
+  padding: 0;
+  margin: 0;
+}
+
+/* List items */
+#leaves-summary li {
+  list-style: none;
+  background: #f8f4ff;
+  padding: 12px 15px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(162, 89, 255, 0.15);
+  color: var(--text-dark);
+}
+
+/* Bottom info */
+#leaves-summary::after {
+  content: "Paid/Unpaid Leaves: Unlimited";
+  display: block;
+  background: #e6ffed;
+  border-left: 6px solid #4caf50;
+  padding: 12px 15px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 12px;
 }
